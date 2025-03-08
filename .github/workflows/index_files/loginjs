@@ -1,0 +1,991 @@
+		
+		var IDLE_TIMEOUT = 180; //en segundos
+		var _idleSecondsCounter = 0;
+		document.onclick = function() {
+			_idleSecondsCounter = 0;
+		};
+		document.onkeypress = function() {
+			_idleSecondsCounter = 0;
+		};
+		window.setInterval(CheckIdleTime, 1000);
+		
+		function CheckIdleTime() {
+			_idleSecondsCounter++;
+			var oPanel = document.getElementById("SecondsUntilExpire");
+			if (oPanel)
+				oPanel.innerHTML = (IDLE_TIMEOUT - _idleSecondsCounter) + "";
+			if (_idleSecondsCounter >= IDLE_TIMEOUT) {
+				document.location.href = "/bcn/action/invalidsession";
+			}
+		}
+
+		//ejecutar limpiar sesion
+		function sessionClear()
+		{
+			clearErrorMessages();
+			document.getElementById("sessionclear").style.display="";
+			document.getElementById("loginbotones").style.display="none";
+			if(document.getElementById("sessclear")!=null)
+				document.getElementById("sessclear").disabled=false;
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="GET", 
+							uri="/action/security/sessionclear/form", 
+							divResponse="sessionclear", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div limpiar sesion
+		function displaySessionClear()
+		{
+			document.getElementById("sessclear").disabled=false;
+			document.getElementById("sessionclear").style.display="none";
+			if(document.getElementById("loginbotones")!=null)
+				document.getElementById("loginbotones").style.display="";
+			enabledLink();
+			enabledButton();
+			enabledButtonLogin();
+		}
+		
+		//ejecutar limpiar sesion paso
+		function sessionClearPaso()
+		{
+			document.getElementById("sessclear").disabled=true;
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="GET", 
+							uri="/action/security/sessionclear/paso", 
+							divResponse=null, 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=displaySessionClear);
+
+		}
+		
+		//ejecutar change password VP
+		function expiredPasswordVP()
+		{
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="GET", 
+							uri="/action/security/expiredpassword/vp", 
+							divResponse=null, 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=null, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//ejecutar change password 2
+		function expiredPassword2()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="GET", 
+							uri="/action/security/expiredpassword/paso2", 
+							divResponse="changepassword2", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=displayExpiredPassword2, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del change Password
+		function displayExpiredPassword2()
+		{
+			document.getElementById("login").style.display="none";
+			document.getElementById("changepassword").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("changepassword2").style.display="";
+			document.getElementById("changepassword3").style.display="none";
+		}
+		
+		//ejecutar change password 3
+		function expiredPassword3()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/expiredpassword/paso3", 
+							divResponse="changepassword3", 
+							divProgress="status", 
+							formName="CBNA_CambioContrasena_Paso2", 
+							afterResponseFn=displayExpiredPassword3, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del change Password 3
+		function displayExpiredPassword3()
+		{
+			document.getElementById("login").style.display="none";
+			document.getElementById("changepassword").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("changepassword2").style.display="none";
+			document.getElementById("changepassword3").style.display="";
+		}
+		
+		function DetectarPluginFlash()
+		{ //v3.0
+			var plgIn = "Shockwave Flash";
+			var ok =false
+
+			with (navigator) if (appName.indexOf('Microsoft')==-1 || (plugins && plugins.length))
+			{
+				ok=(plugins && plugins[plgIn]);
+			}
+			else if (appVersion.indexOf('3.1')==-1)
+			{ //not Netscape or Win3.1
+				if (plgIn.indexOf("Flash")!=-1 && window.MM_flash!=null) ok=window.MM_flash;
+				else if (plgIn.indexOf("Director")!=-1 && window.MM_dir!=null) ok=window.MM_dir;
+			}
+			return(ok);
+		}
+	
+		function MM_swapImgRestore() { //v3.0
+			var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+		}
+
+		function MM_preloadImages() { //v3.0
+			var d=document;
+		
+			if(d.images)
+			{
+				if(!d.MM_p) d.MM_p=new Array();
+		
+				var i,j=d.MM_p.length,a=MM_preloadImages.arguments;
+			
+				for(i=0; i<a.length; i++)
+					if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i]; }
+			}
+		}
+
+		function MM_findObj(n, d) { //v4.01
+			var p,i,x;
+			
+			if(!d) d=document;
+			
+			if((p=n.indexOf("?"))>0&&parent.frames.length){ d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p); }
+			
+			if(!(x=d[n])&&d.all) x=d.all[n];
+			
+			for (i=0;!x&&i<d.forms.length;i++)
+				x=d.forms[i][n];
+
+			for(i=0;!x&&d.layers&&i<d.layers.length;i++)
+				x=MM_findObj(n,d.layers[i].document);
+
+			if(!x && d.getElementById) x=d.getElementById(n);
+			
+			return x;
+		}
+
+		function MM_swapImage() { //v3.0
+			var i,j=0,x,a=MM_swapImage.arguments;
+			
+			document.MM_sr=new Array;
+			
+			for(i=0;i<(a.length-2);i+=3)
+				if ((x=MM_findObj(a[i]))!=null){ document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2]; }
+		}
+
+		with (navigator)
+			if (appName.indexOf('Microsoft')!=-1 && appVersion.indexOf('Mac')==-1)
+				document.write( ''+
+					'<scr'+'ipt language="VBScript">\nOn error resume next\n'+
+					'MM_dir = IsObject(CreateObject("SWCtl.SWCtl.1"))\n'+
+					'MM_flash = NOT IsNull(CreateObject("ShockwaveFlash.ShockwaveFlash"))\n<\/scr'+'ipt>' );
+
+		function flPasarFoco(parEvento, parProximo)
+		{
+			var vtTecla = (parEvento)? parEvento.keyCode:event.keyCode;
+			
+			if(vtTecla == 13)
+			{
+				document.getElementsByName(parProximo)[0].focus();
+				return false;
+			}
+		}
+		
+		//ejecutar login
+		function login()
+		{
+			document.getElementById("userid").readOnly=true;
+			document.getElementById("password").readOnly=true;
+			document.getElementById("botonA").disabled=true;
+			document.getElementById("botonL").disabled=true;
+			
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/login", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="conexion", 
+							afterResponseFn=null, 
+							onErrorFn=enabledButtonLogin);
+
+		}
+		
+		function enabledButtonLogin() 
+		{
+			document.getElementById("botonA").disabled=false;
+			document.getElementById("botonL").disabled=false;
+			document.getElementById("userid").readOnly=false;
+			document.getElementById("password").readOnly=false;
+		}
+		
+		function ValidaLogin()
+		{
+			var stringlog = document.conexion.userid.value;
+			var stringpass = document.conexion.password.value;
+
+			if (stringlog == "") 
+			{
+				alert ('Debe Colocar su Login');
+				document.conexion.userid.focus();
+				enabledButtonLogin();
+				return false;
+			}
+		
+			if ((stringlog.length < 6) || (stringlog.length > 15)) 
+			{
+				alert ('El login debe tener una longitud entre seis y quince caracteres.');
+				document.conexion.userid.value = "";
+				enabledButtonLogin();
+				document.conexion.userid.focus();
+				return false;
+			}	
+
+			if (stringpass == "" ) 
+			{
+				alert ('Debe Colocar su Password');
+				enabledButtonLogin();
+				document.conexion.password.focus();
+				return false;
+			}
+
+			document.conexion.action = '/bcn/CBNA_login_ssl';
+			document.conexion.submit();
+		}
+		
+		//activar links
+		function enabledLink()
+		{
+			if(document.getElementById("aforgotLogin")!=null)
+				document.getElementById("aforgotLogin").href="javascript:forgotLogin();";
+			if(document.getElementById("aforgotPassword")!=null)
+				document.getElementById("aforgotPassword").href="javascript:forgotPassword();";
+			if(document.getElementById("acreateUser")!=null)
+				document.getElementById("acreateUser").href="javascript:createUser();";
+			if(document.getElementById("achangePassword")!=null)
+				document.getElementById("achangePassword").href="javascript:changePassword();";
+			if(document.getElementById("ablockUser")!=null)
+				document.getElementById("ablockUser").href="javascript:blockUser();";
+			
+			enabledButton();
+
+		}
+		
+		//activa botones
+		function enabledButton() {
+			if(document.getElementById("loginbotones")!=null)
+				document.getElementById("loginbotones").style.display="";
+			
+			var inputTags = document.getElementsByTagName('INPUT');
+			for(var i=0;i<inputTags.length;i++) {
+				inputTags[i].disabled=false;
+			}
+			
+			inputTags = document.getElementsByTagName('SELECT');
+			for(var i=0;i<inputTags.length;i++) {
+				inputTags[i].disabled=false;
+			}
+		}
+		
+		//desactiva botones
+		function disabledButton() {
+			var inputTags = document.getElementsByTagName('INPUT');
+			for(var i=0;i<inputTags.length;i++) {
+				inputTags[i].disabled=true;
+			}
+			
+			inputTags = document.getElementsByTagName('SELECT');
+			for(var i=0;i<inputTags.length;i++) {
+				inputTags[i].disabled=true;
+			}
+		}
+		
+		//ejecutar forgot login
+		function forgotLogin()
+		{
+			clearErrorMessages();
+			
+			if(document.getElementById("aforgotPassword")!=null)
+				document.getElementById("aforgotPassword").href="#";
+			if(document.getElementById("acreateUser")!=null)
+				document.getElementById("acreateUser").href="#";
+			if(document.getElementById("achangePassword")!=null)
+				document.getElementById("achangePassword").href="#";
+			if(document.getElementById("ablockUser")!=null)
+				document.getElementById("ablockUser").href="#";
+			
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="/action/security/forgotlogin/form", 
+							divResponse="forgotlogin", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=displayForgotLogin, 
+							onErrorFn=enabledLink);
+
+		}
+		
+		//mostrar div del forgot login
+		function displayForgotLogin()
+		{
+			if(document.conexion!=null)
+				document.conexion.reset();
+			document.getElementById("login").style.display="none";
+			document.getElementById("forgotlogin").style.display="";
+			document.getElementById("forgotloginpaso2").style.display="none";
+			document.getElementById("forgotloginpaso3").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			
+		}
+		
+		//ejecutar forgot login paso 2
+		function forgotLogin2()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/forgotlogin/paso2", 
+							divResponse="forgotloginpaso2", 
+							divProgress="status", 
+							formName="CBNA_OlvidoLogin_Paso1", 
+							afterResponseFn=displayForgotLogin2, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del forgot login paso 2
+		function displayForgotLogin2()
+		{
+			document.getElementById("forgotlogin").style.display="none";
+			document.getElementById("forgotloginpaso2").style.display="";
+			document.getElementById("forgotloginpaso3").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+		}
+		
+		//ejecutar forgot login paso 3
+		function forgotLogin3()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(	httpMethod="POST", 
+							uri="/action/security/forgotlogin/paso3", 
+							divResponse="forgotloginpaso3", 
+							divProgress="status", 
+							formName="CBNA_OlvidoLogin_Paso2", 
+							afterResponseFn=displayForgotLogin3, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del forgot login paso 3
+		function displayForgotLogin3()
+		{
+			document.getElementById("forgotlogin").style.display="none";
+			document.getElementById("forgotloginpaso2").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("forgotloginpaso3").style.display="";
+		}
+		
+		//ejecutar forgot password
+		function forgotPassword()
+		{
+			clearErrorMessages();
+			
+			if(document.getElementById("aforgotLogin")!=null)
+				document.getElementById("aforgotLogin").href="#";
+			if(document.getElementById("acreateUser")!=null)
+				document.getElementById("acreateUser").href="#";
+			if(document.getElementById("achangePassword")!=null)
+				document.getElementById("achangePassword").href="#";
+			if(document.getElementById("ablockUser")!=null)
+				document.getElementById("ablockUser").href="#";
+			
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="/action/security/forgotpassword/form", 
+							divResponse="forgotpassword", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=displayForgotPassword, 
+							onErrorFn=enabledLink);
+
+		}
+		
+		//mostrar div del forgot Password
+		function displayForgotPassword()
+		{
+			if(document.conexion!=null)
+				document.conexion.reset();
+			document.getElementById("login").style.display="none";
+			document.getElementById("forgotpassword").style.display="";
+		}
+		
+		//ejecutar forgot password VP
+		function forgotPasswordVP()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/forgotpassword/vp", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="CBNA_OlvidoContrasenia_Paso2", 
+							afterResponseFn=null, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//ejecutar forgot password 2
+		function forgotPassword2()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/forgotpassword/paso2", 
+							divResponse="forgotpassword2", 
+							divProgress="status", 
+							formName="CBNA_OlvidoContrasenia_Paso1", 
+							afterResponseFn=displayForgotPassword2, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del forgot Password
+		function displayForgotPassword2()
+		{
+			document.getElementById("forgotpassword").style.display="none";
+			document.getElementById("forgotpassword3").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("forgotpassword2").style.display="";
+		}
+		
+		//ejecutar forgot password 3
+		function forgotPassword3()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="GET", 
+							uri="/action/security/forgotpassword/paso3", 
+							divResponse="forgotpassword3", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=displayForgotPassword3, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del forgot Password
+		function displayForgotPassword3()
+		{
+			document.getElementById("forgotpassword").style.display="none";
+			document.getElementById("forgotpassword2").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("forgotpassword3").style.display="";
+			document.getElementById("forgotpassword4").style.display="none";
+		}
+		
+		//ejecutar forgot password 4
+		function forgotPassword4()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/forgotpassword/paso4", 
+							divResponse="forgotpassword4", 
+							divProgress="status", 
+							formName="CBNA_OlvidoContrasenia_Paso3", 
+							afterResponseFn=displayForgotPassword4, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del forgot Password
+		function displayForgotPassword4()
+		{
+			document.getElementById("forgotpassword").style.display="none";
+			document.getElementById("forgotpassword2").style.display="none";
+			document.getElementById("forgotpassword3").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("forgotpassword4").style.display="";
+		}
+		
+		//ejecutar change password
+		function changePassword()
+		{
+			clearErrorMessages();
+			
+			if(document.getElementById("aforgotLogin")!=null)
+				document.getElementById("aforgotLogin").href="#";
+			if(document.getElementById("aforgotPassword")!=null)
+				document.getElementById("aforgotPassword").href="#";
+			if(document.getElementById("acreateUser")!=null)
+				document.getElementById("acreateUser").href="#";
+			if(document.getElementById("ablockUser")!=null)
+				document.getElementById("ablockUser").href="#";
+			
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="/action/security/changepassword/form", 
+							divResponse="changepassword", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=displayChangePassword, 
+							onErrorFn=enabledLink);
+
+		}
+		
+		//mostrar div del change password
+		function displayChangePassword()
+		{
+			if(document.conexion!=null)
+				document.conexion.reset();
+			document.getElementById("login").style.display="none";
+			document.getElementById("changepassword").style.display="";
+			document.getElementById("changepassword2").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+		}
+		
+		//ejecutar change password VP
+		function changePasswordVP()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/changepassword/vp", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="CBNA_CambioContrasena_Paso1", 
+							afterResponseFn=null, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//ejecutar change password 2
+		function changePassword2()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="GET", 
+							uri="/action/security/changepassword/paso2", 
+							divResponse="changepassword2", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=displayChangePassword2, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del change Password
+		function displayChangePassword2()
+		{
+			document.getElementById("changepassword").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("changepassword2").style.display="";
+			document.getElementById("changepassword3").style.display="none";
+		}
+		
+		//ejecutar change password 3
+		function changePassword3()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/changepassword/paso3", 
+							divResponse="changepassword3", 
+							divProgress="status", 
+							formName="CBNA_CambioContrasena_Paso2", 
+							afterResponseFn=displayChangePassword3, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del change Password 3
+		function displayChangePassword3()
+		{
+			document.getElementById("changepassword").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("changepassword2").style.display="none";
+			document.getElementById("changepassword3").style.display="";
+		}
+		
+		//ejecutar block user
+		function blockUser()
+		{
+			clearErrorMessages();
+			
+			if(document.getElementById("aforgotLogin")!=null)
+				document.getElementById("aforgotLogin").href="#";
+			if(document.getElementById("aforgotPassword")!=null)
+				document.getElementById("aforgotPassword").href="#";
+			if(document.getElementById("acreateUser")!=null)
+				document.getElementById("acreateUser").href="#";
+			if(document.getElementById("achangePassword")!=null)
+				document.getElementById("achangePassword").href="#";
+			
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="/action/security/blockuser/form", 
+							divResponse="blockuser", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=displayBlockUser, 
+							onErrorFn=enabledLink);
+
+		}
+		
+		//mostrar div del block user
+		function displayBlockUser()
+		{
+			if(document.conexion!=null)
+				document.conexion.reset();
+			document.getElementById("login").style.display="none";
+			document.getElementById("blockuser").style.display="";
+			document.getElementById("blockuserpaso2").style.display="none";
+			document.getElementById("blockuserpaso3").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+		}
+		
+		//ejecutar bloc kuser VP
+		function blockUserVP()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/blockuser/vp", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="CBNA_DesbloqueoUsuario_Paso2", 
+							afterResponseFn=null, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//ejecutar block user paso 2
+		function blockUser2()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/blockuser/paso2", 
+							divResponse="blockuserpaso2", 
+							divProgress="status", 
+							formName="CBNA_DesbloqueoUsuario_Paso1", 
+							afterResponseFn=displayBlockUser2, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del block user paso 2
+		function displayBlockUser2()
+		{
+			document.getElementById("blockuser").style.display="none";
+			document.getElementById("blockuserpaso2").style.display="";
+			document.getElementById("blockuserpaso3").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+		}
+		
+		//ejecutar block user paso 3
+		function blockUser3()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(	httpMethod="GET", 
+							uri="/action/security/blockuser/paso3", 
+							divResponse="blockuserpaso3", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=displayBlockUser3, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del block user paso 3
+		function displayBlockUser3()
+		{
+			document.getElementById("blockuser").style.display="none";
+			document.getElementById("blockuserpaso2").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("blockuserpaso3").style.display="";
+		}
+		
+		//ejecutar create user
+		function createUser()
+		{
+			clearErrorMessages();
+			
+			if(document.getElementById("aforgotLogin")!=null)
+				document.getElementById("aforgotLogin").href="#";
+			if(document.getElementById("aforgotPassword")!=null)
+				document.getElementById("aforgotPassword").href="#";
+			if(document.getElementById("achangePassword")!=null)
+				document.getElementById("achangePassword").href="#";
+			if(document.getElementById("ablockUser")!=null)
+				document.getElementById("ablockUser").href="#";
+			
+			//llamada Ajax...
+			ajaxCall(httpMethod="GET", 
+							uri="/action/security/createuser/form", 
+							divResponse="createuser", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=displayCreateUser, 
+							onErrorFn=enabledLink);
+
+		}
+		
+		//mostrar div del createuser
+		function displayCreateUser()
+		{
+			if(document.conexion!=null)
+				document.conexion.reset();
+			document.getElementById("login").style.display="none";
+			document.getElementById("createuser").style.display="";
+		}
+		
+		//ejecutar create user VP
+		function createUserVP()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/createuser/vp", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="CBNA_ClienteNuevo_Paso1", 
+							afterResponseFn=null, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//ejecutar create user 2
+		function createUser2()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="GET", 
+							uri="/action/security/createuser/paso2", 
+							divResponse="createuser2", 
+							divProgress="status", 
+							formName=null, 
+							afterResponseFn=displayCreateUser2, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del create user
+		function displayCreateUser2()
+		{
+			document.getElementById("createuser").style.display="none";
+			document.getElementById("createuser3").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("createuser2").style.display="";
+		}
+		
+		//ejecutar create user 3
+		function createUser3()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/createuser/paso3", 
+							divResponse="createuser3", 
+							divProgress="status", 
+							formName="CBNA_ClienteNuevo_Paso2", 
+							afterResponseFn=displayCreateUser3, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del create user
+		function displayCreateUser3()
+		{
+			document.getElementById("createuser").style.display="none";
+			document.getElementById("createuser2").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("createuser3").style.display="";
+			document.getElementById("createuser4").style.display="none";
+		}
+		
+		//ejecutar create user 4
+		function createUser4()
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			//llamada Ajax...
+			return ajaxCall(httpMethod="POST", 
+							uri="/action/security/createuser/paso4", 
+							divResponse=null, 
+							divProgress="status", 
+							formName="CBNA_ClienteNuevo_Paso3", 
+							afterResponseFn=displayCreateUser4, 
+							onErrorFn=enabledButton);
+
+		}
+		
+		//mostrar div del create user
+		function displayCreateUser4()
+		{
+			document.getElementById("createuser").style.display="none";
+			document.getElementById("createuser2").style.display="none";
+			document.getElementById("createuser3").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			document.getElementById("createuser4").style.display="";
+		}
+		
+		//ejecutar verificacion positiva
+		function verificacionPositiva(formulario, paso)
+		{
+			disabledButton();
+			clearErrorMessages();
+			
+			if(formulario!=null) {
+				//llamada Ajax...
+				return ajaxCall(httpMethod="POST", 
+								uri="/action/security/verificacionpositiva/search", 
+								divResponse="verificacionpositiva", 
+								divProgress="status", 
+								formName=formulario, 
+								afterResponseFn=hideDIVVP, 
+								onErrorFn=enabledButton);
+			} else {
+				if(paso!=null) {
+					//llamada Ajax...
+					return ajaxCall(httpMethod="GET", 
+									uri="/action/security/verificacionpositiva/search?pasovp=" + paso, 
+									divResponse="verificacionpositiva", 
+									divProgress="status", 
+									formName=null, 
+									afterResponseFn=hideDIVVP, 
+									onErrorFn=enabledButton);
+				} else {
+					//llamada Ajax...
+					return ajaxCall(httpMethod="GET", 
+									uri="/action/security/verificacionpositiva/search", 
+									divResponse="verificacionpositiva", 
+									divProgress="status", 
+									formName=null, 
+									afterResponseFn=hideDIVVP, 
+									onErrorFn=enabledButton);
+				}
+			}
+
+		}
+		
+		//ocultar DIV
+		function hideDIVVP() {
+			document.getElementById("login").style.display="none";
+			document.getElementById("forgotpassword2").style.display="none";
+			document.getElementById("changepassword").style.display="none";
+			document.getElementById("createuser").style.display="none";
+			document.getElementById("blockuserpaso2").style.display="none";
+		}
+		
+		//mostrar div del login
+		function displayLogin()
+		{
+			if(document.conexion!=null)
+				document.conexion.reset();
+			document.getElementById("login").style.display="";
+			document.getElementById("forgotlogin").style.display="none";
+			document.getElementById("forgotloginpaso2").style.display="none";
+			document.getElementById("forgotloginpaso3").style.display="none";
+			document.getElementById("forgotpassword").style.display="none";
+			document.getElementById("forgotpassword2").style.display="none";
+			document.getElementById("forgotpassword3").style.display="none";
+			document.getElementById("forgotpassword4").style.display="none";
+			document.getElementById("changepassword").style.display="none";
+			document.getElementById("changepassword2").style.display="none";
+			document.getElementById("changepassword3").style.display="none";
+			document.getElementById("blockuser").style.display="none";
+			document.getElementById("blockuserpaso2").style.display="none";
+			document.getElementById("blockuserpaso3").style.display="none";
+			document.getElementById("createuser").style.display="none";
+			document.getElementById("createuser2").style.display="none";
+			document.getElementById("createuser3").style.display="none";
+			document.getElementById("createuser4").style.display="none";
+			document.getElementById("verificacionpositiva").style.display="none";
+			
+			document.getElementById("forgotlogin").innerHTML="";
+			document.getElementById("forgotloginpaso2").innerHTML="";
+			document.getElementById("forgotloginpaso3").innerHTML="";
+			document.getElementById("forgotpassword").innerHTML="";
+			document.getElementById("forgotpassword2").innerHTML="";
+			document.getElementById("forgotpassword3").innerHTML="";
+			document.getElementById("forgotpassword4").innerHTML="";
+			document.getElementById("changepassword").innerHTML="";
+			document.getElementById("changepassword2").innerHTML="";
+			document.getElementById("changepassword3").innerHTML="";
+			document.getElementById("blockuser").innerHTML="";
+			document.getElementById("blockuserpaso2").innerHTML="";
+			document.getElementById("blockuserpaso3").innerHTML="";
+			document.getElementById("createuser").innerHTML=""
+			document.getElementById("createuser2").innerHTML=""
+			document.getElementById("createuser3").innerHTML=""
+			document.getElementById("createuser4").innerHTML=""
+			document.getElementById("verificacionpositiva").innerHTML="";
+			
+			enabledLink();
+			enabledButton();
+			enabledButtonLogin();
+		}

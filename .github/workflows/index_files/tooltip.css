@@ -1,0 +1,10 @@
+.tooltiptitle{COLOR: #FFFFFF; TEXT-DECORATION: none; CURSOR: Default; font-family: arial; font-weight: bold; font-size: 8pt}
+.tooltipcontent{COLOR: #000000; TEXT-DECORATION: none; CURSOR: Default; font-family: arial; font-size: 8pt}
+
+#ToolTip{position:absolute; width: 200px; top: 0px; left: 0px; z-index:4; visibility:hidden;}
+
+.NArial   {font-family: arial; font-size: 10pt}
+.NArialL  {font-family: arial; font-size: 12pt}
+.NArialS  {font-family: arial; font-size: 8pt}
+.NArialW  {COLOR: #FFFFFF; font-family: arial; font-size: 10pt}
+

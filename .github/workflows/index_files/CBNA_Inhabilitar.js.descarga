@@ -1,0 +1,53 @@
+//************************************************************************* 
+// ARCHIVO:         inhabilitar.js
+// PRODUCTO:        SSL
+//*******************************************************
+//
+//                   IMPORTANTE
+// Esta aplicación es parte de los  paquetes bancarios
+// propiedad de BIT Consulting 2013.
+// Su uso no autorizado queda  expresamente  prohibido
+// asi como cualquier alteración o agregado hecho  por
+// alguno de sus usuarios sin el debido consentimiento
+// por escrito de BIT Consulting 2013.
+//
+// Este programa esta protegido por la ley de derechos
+//  de autor y por las convenciones  internacionales de
+// propiedad intelectual.  Su uso  no  autorizado dará
+// derecho a BIT Consulting 2013 para obtener ordenes  
+// de secuestro o  retención  y  para  perseguir 
+// penalmente a  los autores de cualquier infracción.
+//
+//*******************************************************
+//                    PROPOSITO
+//  inhabilitar el uso del boton derecho del raton/mouse 
+//  del cliente
+//******************************************************
+//                    MODIFICACIONES
+// FECHA        AUTOR           RAZON
+// 23/10/2006  Simon Montaño   Emisión Inicial
+// 23/10/2006  Simon Montaño   Reingeniería SSL
+//*************************************************************************
+
+
+  var sMensaje = '© Banco del Caribe.\nTodos los derechos reservados.';
+
+  function anularBotonDerecho(e) {
+
+    if (navigator.appName == 'Netscape'
+       && (e.which == 3 || e.which ==    2)){
+      alert(sMensaje);
+      return false;
+    } else if (navigator.appName == 'Microsoft Internet Explorer' 
+        && (event.button    == 2)) {
+      alert(sMensaje);
+    }
+  }
+
+  document.onmousedown=anularBotonDerecho;
+  document.oncontextmenu=new Function("return false");
+
+
+			
+			
+

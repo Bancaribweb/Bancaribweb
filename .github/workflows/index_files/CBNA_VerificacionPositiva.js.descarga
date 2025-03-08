@@ -1,0 +1,31 @@
+
+function flValidarRespuesta(parIdPregunta) {
+	var opcion;
+
+	if ((document.frmVerifPosi.opcion1.checked == false)
+			&& (document.frmVerifPosi.opcion2.checked == false)) {
+		alert('Debe seleccionar una respuesta');
+		document.frmVerifPosi.opcion1.checked = false;
+		document.frmVerifPosi.opcion2.checked = false;
+	}
+
+	if (document.frmVerifPosi.opcion1.checked) {
+		opcion = '8';
+		document.frmVerifPosi.opcion2.disabled = true;
+		document.frmVerifPosi.opcion2.checked = false;
+	}
+
+	if (document.frmVerifPosi.opcion2.checked) {
+		opcion = '9';
+		document.frmVerifPosi.opcion1.disabled = true;
+		document.frmVerifPosi.opcion1.checked = false;
+	}
+
+	if ((document.frmVerifPosi.opcion1.checked)
+			|| (document.frmVerifPosi.opcion2.checked)) {
+		document.frmVerifPosi.action = 'CBNA_Verificacion_Positiva.asp?nivel=1&la='
+				+ parIdPregunta + '&li=' + opcion;
+		document.frmVerifPosi.submit();
+	}
+}
+

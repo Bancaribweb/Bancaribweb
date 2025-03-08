@@ -1,0 +1,13 @@
+function ValidaEntradaAlfanumerica() {
+	if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode == 46)
+			|| (event.keyCode == 32)
+			|| (event.keyCode >= 65 && event.keyCode <= 122)
+			|| (event.keyCode == 161) || (event.keyCode == 130)
+			|| (event.keyCode == 163) || (event.keyCode == 160)
+			|| (event.keyCode == 162) || (event.keyCode == 64))
+
+	{
+	} else {
+		event.returnValue = false;
+	}
+}

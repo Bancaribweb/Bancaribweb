@@ -1,0 +1,204 @@
+var rulesPassed = false;
+var validateMessage = "No input provided for change password operation";
+var isIE = (navigator.appName.substring(0, 9) == "Microsoft");
+var isNetscape = (navigator.appName.substring(0, 8) == "Netscape");
+if (isIE) {
+	eventObject = "window.event";
+} else {
+	eventObject = "event";
+}
+if (document.images) {
+	var checkmark = new Image();
+	checkmark.src = "/bcn/images/check.gif";
+	var checkx = new Image();
+	checkx.src = "/bcn/images/redx.gif";
+}
+
+function ValidarPassword(theForm) {
+	// SE VALIDA QUE EL PASSWORD NO ESTE VACIO
+	if (theForm.newpassword.value == '') {
+		alert('INGRESE LA NUEVA CONTRSEÑA');
+		return false;
+	}
+
+}
+
+function passwordCheck(theForm, theEvent) {
+
+	validateMessage = "";
+	eventType = theEvent.type;
+
+	if (isIE || isNetscape) {
+
+		var val = theForm.newpassword.value;
+		var val2 = theForm.confirmpassword.value;
+
+		// 1. Password length check
+		if (!passwordCheckLength(val, 8)) {
+
+			validateMessage = validateMessage
+					+ " - La contraseña debe tener al menos 8 caracteres.\n";
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check1.src != checkx.src)) {
+
+				document.check1.src = checkx.src;
+			}
+		} else {
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check1.src != checkmark.src)) {
+				document.check1.src = checkmark.src;
+			}
+		}
+		
+		// 2. Uppercase check
+        if  (!passwordCheckUpperCase(val))   
+		{
+			validateMessage = validateMessage + " - La contraseña debe tener al menos un carácter en Mayuscula.\n";
+			if ((eventType == "keyup" || eventType == "blur") && (document.check20.src != checkx.src))
+			{
+				document.check20.src = checkx.src;
+			}
+		}
+		else
+		{
+		    if ((eventType == "keyup" || eventType == "blur") && (document.check20.src != checkmark.src))
+			{
+				document.check20.src = checkmark.src;
+			}
+		}
+        
+        // 3. Lowercase check
+        
+		if (!passwordCheckLowerCase(val))
+		{
+			validateMessage = validateMessage + " - La contraseña debe tener al menos un carácter en Minuscula.\n";
+			if ((eventType == "keyup" || eventType == "blur") && (document.check21.src != checkx.src))
+			{
+				document.check21.src = checkx.src;
+			}
+		}
+		else
+		{
+		    if ((eventType == "keyup" || eventType == "blur") && (document.check21.src != checkmark.src))
+			{
+				document.check21.src=checkmark.src;
+			}
+		}
+                  
+
+		// 2. Numeric check
+		if (!passwordCheckNumericChar(val)) //(!passwordCheckUpperCase(theForm.newpassword.value))
+		{
+			validateMessage = validateMessage
+					+ " - La contraseña debe tener al menos un caracter Numerico.\n";
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check2.src != checkx.src)) {
+
+				document.check2.src = checkx.src;
+			}
+		} else {
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check2.src != checkmark.src)) {
+
+				document.check2.src = checkmark.src;
+			}
+		}
+
+		// 3. Alfabetico check
+		/*if (!passwordChecknAlphaChar(val)) {
+			validateMessage = validateMessage
+					+ " - La contraseña debe tener al menos un caracter Alfabetico.\n";
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check3.src != checkx.src)) {
+				document.check3.src = checkx.src;
+			}
+		} else {
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check3.src != checkmark.src)) {
+				document.check3.src = checkmark.src;
+			}
+		}*/
+
+		// 4. Special check
+		if (!passwordCheckSpecialChar(val)) {
+			validateMessage = validateMessage
+					+ " - La contraseña debe tener al menos un caracter especial permitido.\n";
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check4.src != checkx.src)) {
+				document.check4.src = checkx.src;
+			}
+		} else {
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check4.src != checkmark.src)) {
+				document.check4.src = checkmark.src;
+			}
+		}
+
+		// 5. Password match check
+		if (!passwordCheckPasswordMatch(val, val2)) {
+			validateMessage = validateMessage
+					+ " - La nueva contraseña debe coincidir con su confirmación.\n";
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check5.src != checkx.src)) {
+				document.check5.src = checkx.src;
+			}
+		} else {
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check5.src != checkmark.src)) {
+				document.check5.src = checkmark.src;
+			}
+		}
+
+		// 6. Special check no permitidos
+		if (!(PasswordCheckSpecialCharNoPermitido(val) || PasswordCheckSpecialCharNoPermitido(val2))) {
+
+			validateMessage = validateMessage
+					+ " - La contraseña no debe tener un carácter especial no permitido.\n";
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check6.src != checkmark.src)) {
+
+				document.check6.src = checkmark.src;
+			}
+		} else {
+
+			if ((eventType == "keyup" || eventType == "blur")
+					&& (document.check6.src != checkx.src)) {
+
+				document.check6.src = checkx.src;
+			}
+		}
+	}
+
+	rulesPassed = (validateMessage.length == 0);
+	return rulesPassed;
+}
+
+if (isNetscape) {
+	document.captureEvents(Event.KEYPRESS);
+	document.onkeypress = function(evt) {
+		if (evt.target.name == 'newpassword'
+				|| evt.target.name == 'confirmpassword')
+			passwordCheck(evt.target.form, evt);
+	};
+}
+// The function resets all the text fields and then calls passwordCheck to reset the checkx's 
+function resetPage(theForm) {
+	var anEvent = new Object();
+	anEvent.type = "keyup";
+	theForm.newpassword.value = "";
+	theForm.confirmpassword.value = "";
+	passwordCheck(theForm, anEvent);
+}
+
+function submitPage(theForm) {
+	var anEvent = new Object();
+	anEvent.type = "keyup";
+	passwordCheck(theForm, anEvent);
+
+	if (rulesPassed) {
+		apiAccess.entrustTruePassClientAPI
+				.entrustTruePassChangePassword(theForm);
+	} else {
+		alert(validateMessage);
+	}
+}
